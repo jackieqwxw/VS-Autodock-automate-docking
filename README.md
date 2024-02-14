@@ -1,4 +1,4 @@
-## VS-Autodock-automate-docking
+## VS-Autodock-docking
 This tool will use Autodock to perform automate molecular docking in batch on Linux system.
 
 # Installation
@@ -32,13 +32,13 @@ source ~/.bashrc
 
 3. Prepare you protein thorougly before docking. You can use Protein Preparation tools in Maestro or any other software you like. Google 'protein preparation before docking'.
 
-4. Generate pdbqt file of receptor and grid file `config.txt` shown as attached.
+4. Download [MGLTools](https://ccsb.scripps.edu/mgltools/downloads/) (platform Windows) to install. We will use `AutoDockTools-1.5.x` to generate pdbqt file of receptor and grid file `config.txt` shown as attached.
 
 5. Prepare you database in a format "smiles id". An example 'ligands.smi' is attached.
 
 
 # Run structural-based virtual screening (SBVS) of the ligand database on the protein of your interest in parallel
-Here, we used a part of `MolPort` database as an example, generating the SMILES file `ligands.smi`:
+Here, we used a portion of MolPort database to generate the SMILES file `ligands.smi` as an example:
 
 1. Make sure the file `ligands.smi` was uploaded in your working directory. 
 
@@ -70,11 +70,10 @@ ls | wc -l
 ```
 sbatch launch.sh
 ```
-
 When the calculation on VS was done, you will get multiple output files with the suffix ‘.out’.
 
 6. Selecting the top-ranking compounds based on Autodock scores can be achieved by executing the following script after performing virtual screening:
 ```
 bash ./data_process_after_Autodock.sh
 ```
-This script will select the top 5000 compounds (for example) based on Autodock scores and generate an output file named `AD_select.sdf`. This file can then be used for further refined docking process.
+This script will select the top 5000 compounds (change this number accordingly) based on Autodock scores and generate an output file named `AD_select.sdf`. This file can then be used for further refined docking process.
