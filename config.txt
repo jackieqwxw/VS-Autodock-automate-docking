@@ -1,0 +1,7 @@
+receptor = Structure_DDX1.pdbqt
+center_x = -2.161
+center_y = 26.889
+center_z = -3.466
+size_x = 40
+size_y = 40
+size_z = 40
