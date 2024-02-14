@@ -12,6 +12,17 @@ conda activate obabel
 ```
 conda install -c conda-forge openbabel
 ```
+# Prerequisites
+1. Download and install Autodock Tools from the official site. A binary smina file is attached. Smina is a fork of Autodock Vina with enchanced scoring function.
+
+2. Download  MGLTools (platform Linux) and set environment variable. The path should be `/your_path/mgltools_x86_64Linux2_1.5.6/bin`. We will use `python2.5` under this path for preparing ligands for Autodock docking.
+
+3. Prepare you protein thorougly before docking. You can use Protein Preparation tools in Maestro or any other software you like. Google 'protein preparation before docking'.
+
+4. Generate pdbqt file of receptor and grid file `config.txt` shown as attached.
+
+5. Prepare you database in a format "smiles id". An example 'ligands.smi' is attached.
+
 
 # Run structural-based virtual screening (SBVS) of the ligand database on the protein of your interest in parallel
 Here, we used `MolPort` database as an example:
