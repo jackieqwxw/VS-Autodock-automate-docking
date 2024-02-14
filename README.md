@@ -64,7 +64,7 @@ ls | wc -l
 
 4.5 Update the location of `conda.sh`. Mine is at `~/Tools/software/miniconda3/etc/profile.d/conda.sh`. Or, run `conda activate obabel` to activate obabel enviroment.
 
-4.6 For current bash script setting, we can explain that each job contains 5 compounds. It will use 2 CPUs to run docking for each job. The time limit for running one splilt job file is 4 hours. It can run 2,000 jobs in parallel at a time.
+4.6 For current bash script setting, we can explain that each job contains 5 compounds. It will use 2 CPUs to run docking for each job. The time limit for running one splilt job file is 4 hours. It can run 1,899 jobs in parallel at a time.
  
 5. Submit and run the job script:
 ```
