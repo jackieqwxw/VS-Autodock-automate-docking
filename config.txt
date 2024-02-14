@@ -1,4 +1,4 @@
-receptor = Structure_DDX1.pdbqt
+receptor = receptor.pdbqt
 center_x = -2.161
 center_y = 26.889
 center_z = -3.466
