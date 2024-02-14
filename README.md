@@ -1,5 +1,5 @@
 ## VS-Autodock-automate-docking
-This tool will use Autodock to perform automate molecular docking in batch 
+This tool will use Autodock to perform automate molecular docking in batch on Linux system.
 
 # Installation
 Install openbabel on Linux using conda:
@@ -12,10 +12,23 @@ conda activate obabel
 ```
 conda install -c conda-forge openbabel
 ```
-# Prerequisites
-1. Download and install Autodock Tools from the official site. A binary smina file is attached. Smina is a fork of Autodock Vina with enchanced scoring function.
 
-2. Download  MGLTools (platform Linux) and set environment variable. The path should be `/your_path/mgltools_x86_64Linux2_1.5.6/bin`. We will use `python2.5` under this path for preparing ligands for Autodock docking.
+# Prerequisites
+1. Smina is a fork of Autodock Vina with enchanced scoring function. We use smina.static for docking calculations. Download and upload the binary smina.static file to your working directory. Change the mode of the file `smina.static` by using the command:
+```
+chmod +x smina.static
+```
+
+2. Download  [MGLTools](https://ccsb.scripps.edu/mgltools/downloads/) (platform Linux) and set environment variable under the hidden file `~/.bashrc`. The path should be `/your_path/mgltools_x86_64Linux2_1.5.6/bin`. Change the path name accordingly. We will use `python2.5` under this path for preparing ligands for Autodock docking.
+```
+vi ~/.bashrc
+```
+```
+export PATH="/you_path/mgltools_x86_64Linux2_1.5.6/bin:/your_path/mgltools_x86_64Linux2_1.5.6/bin:$PATH"
+```
+```
+source ~/.bashrc
+```
 
 3. Prepare you protein thorougly before docking. You can use Protein Preparation tools in Maestro or any other software you like. Google 'protein preparation before docking'.
 
@@ -25,23 +38,23 @@ conda install -c conda-forge openbabel
 
 
 # Run structural-based virtual screening (SBVS) of the ligand database on the protein of your interest in parallel
-Here, we used `MolPort` database as an example:
+Here, we used a part of `MolPort` database as an example, generating the SMILES file `ligands.smi`:
 
-1. Make sure the Molport database was downloaded in the working directory. 
+1. Make sure the file `ligands.smi` was uploaded in your working directory. 
 
-2. Split the database into multiple smaller files containing couples of molecules such as 350 using the split command:
+2. Split the database into multiple smaller files containing couples of molecules such as 5 using the split command. Change `name_of_splitfile` to any:
 ```
-split -l 350 -d -e --additional-suffix=.smi name_of_MolPortfile name_of_splitfile
+split -l 5 -d -e --additional-suffix=.smi ligands.smi name_of_splitfile
 ```
 
-3. Note the number of split flies that were made by entering this on the command line (e.g., files from 0-22,784): 
+3. Count the number of split flies that were made by entering this on the command line (e.g., files from 0-1898): 
 ```
 ls | wc -l 
 ```
 
 4. Set to run SBVS in parallel:
 
-4.1 Open the `launch.sh` script and edit the file based on the number of split files that were generated: `--array 0-22784`. Modify this array number accordingly.
+4.1 Open the `launch.sh` script and edit the file based on the number of split files that were generated: `--array 0-1898`. Modify this array number accordingly.
    
 4.2 Use the option `--partition` to specify the partition. If not specified the partition, the jobs would be automatically to the General partition. 
 
@@ -51,7 +64,7 @@ ls | wc -l
 
 4.5 Update the location of `conda.sh`. Mine is at `~/Tools/software/miniconda3/etc/profile.d/conda.sh`. Or, run `conda activate obabel` to activate obabel enviroment.
 
-4.6 For current bash script setting, we can explain that each job contains 350 compounds. It will use 2 CPUs to run docking for each job. The time limit for running one splilt job file is 4 hours. It can run 2,000 jobs in parallel at a time.
+4.6 For current bash script setting, we can explain that each job contains 5 compounds. It will use 2 CPUs to run docking for each job. The time limit for running one splilt job file is 4 hours. It can run 2,000 jobs in parallel at a time.
  
 5. Submit and run the job script:
 ```
